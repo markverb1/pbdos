@@ -9,18 +9,15 @@ TARGET = $(BUILDDIR)/pbdos.exe
 
 $(TARGET) : $(OBJS)
 	@if not exist "$(BUILDDIR)" mkdir "$(BUILDDIR)"
-	$(LINK) name $(BUILDDIR)/pbdos sys dos d all op m,maxe=25,q,symf FIL {$(OBJS)}
+	$(LINK) name $(BUILDDIR)/pbdos sys dos d all op maxe=25,q,symf option map=$(BUILDDIR)/pbdos.map FIL {$(OBJS)}
 
 $(BUILDDIR)/beep.obj : src\beep.c
-	@if not exist "$(BUILDDIR)" mkdir "$(BUILDDIR)"
 	$(CC) src\beep.c $(CFLAGS) $(INC) -fo=$(BUILDDIR)/beep.obj
 
 $(BUILDDIR)/main.obj : src\main.c
-	@if not exist "$(BUILDDIR)" mkdir "$(BUILDDIR)"
 	$(CC) src\main.c $(CFLAGS) $(INC) -fo=$(BUILDDIR)/main.obj
 
 $(BUILDDIR)/pbutil.obj : src\pbutil.c
-	@if not exist "$(BUILDDIR)" mkdir "$(BUILDDIR)"
 	$(CC) src\pbutil.c $(CFLAGS) $(INC) -fo=$(BUILDDIR)/pbutil.obj
 
 

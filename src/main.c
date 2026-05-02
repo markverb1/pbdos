@@ -101,6 +101,8 @@ void game(void)
   char input;
   char endingprint[30];
   unsigned int i = 0;
+  unsigned int bluc = 0;
+  unsigned int yelc = 0;
   for (i = 0; i < 22; i++)
   {
     if (i < 20)
@@ -196,7 +198,35 @@ void game(void)
   _settextcolor(WHITE);
   sprintf(endingprint, "\r\nGame finished, total bytes: %u (%u%%)\r\n", segc, segc * 5);
   _outtext(endingprint);
-  //for ()
+  if (segc == 21)
+    _outtext("\r\n1 byte Overflow!");
+  if (segc == 22)
+    _outtext("\r\n2 byte Overflow!");
+  bluc = 0;
+  yelc = 0;
+  for (i = 0; i < 22; i++)
+  {
+    if (segments[i] == BLUSEG)
+      bluc++;
+    if (segments[i] == YELSEG)
+      yelc++;
+  }
+  _settextcolor(LIGHTBLUE);
+  sprintf(endingprint, "\r\nGood bytes: %u (%u%%)", bluc, bluc * 5);
+  _outtext(endingprint);
+  _settextcolor(YELLOW);
+  sprintf(endingprint, "\r\nCorrupted bytes: %u (%u%%)\r\n", yelc, yelc * 5);
+  _outtext(endingprint);
+  _settextcolor(WHITE);
+  _outtext("\r\n[C]ontinue, [A]bort?");
+  input = getch();
+  if (input == 'c' || input == 'C')
+    game();
+  else
+  {
+    _outtext("\r\n");
+    return;
+  }
 }
 
 void runcmd(char *buf)
