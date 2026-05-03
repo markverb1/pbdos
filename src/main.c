@@ -250,12 +250,20 @@ void runcmd(char *buf)
     _outtext("\r\n");
   }
   else if (strcmp(cmd[0], "ver") == 0)
-  {
     _outtext("\r\n\r\nPB-DOS Version 3.30\r\n");
-  }
   else if (strcmp(cmd[0], "game") == 0)
-  {
     game();
+  else if (strcmp(cmd[0], "exit") == 0)
+  {
+    _outtext("\r\n");
+    exit(1);
+  }
+  else if (strcmp(cmd[0], "help") == 0)
+  {
+    _outtext("'game' - start the game.\r\n");
+    _outtext("'cls' - clear screen.\r\n");
+    _outtext("'ver' - show version details.\r\n");
+    _outtext("'exit' - quit PB-DOS.\r\n");
   }
   else
   {
@@ -361,9 +369,9 @@ int main(int argc, char *argv[])
   delay(500);
   _clearscreen(_GCLEARSCREEN);
   delay(500);
-  _outtext("Progressbar(R) PB-DOS(R) Version 3.314\r\n");
+  _outtext("Progressbar(R) PB-DOS(R) Version 3.315\r\n");
   _outtext("               (C)Copyright Progressbar Corp 1981-1987\r\n");
-  _outtext("Write 'game' and strike enter to begin\r\n");
+  _outtext("Write 'help' and strike enter to get command info.\r\n");
   showprompt("A>");
   getch();
   return 0;
